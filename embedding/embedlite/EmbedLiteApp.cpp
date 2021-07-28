@@ -166,7 +166,9 @@ EmbedLiteApp::StartChild(EmbedLiteApp* aApp)
   NS_ASSERTION(aApp->mState == STARTING, "Wrong timing");
   if (aApp->mEmbedType == EMBED_THREAD) {
     char aLocal;
+#ifdef MOZ_GECKO_PROFILER
     profiler_init(&aLocal);
+#endif // MOZ_GECKO_PROFILER
 
     if (!aApp->mListener ||
         !aApp->mListener->ExecuteChildThread()) {
@@ -289,7 +291,9 @@ EmbedLiteApp::StopChildThread()
 {
   NS_ENSURE_TRUE(mEmbedType == EMBED_THREAD, false);
   LOGT("mUILoop:%p, current:%p", mUILoop, MessageLoop::current());
+#ifdef MOZ_GECKO_PROFILER
   profiler_shutdown();
+#endif // MOZ_GECKO_PROFILER
 
   if (!mUILoop || !MessageLoop::current() ||
       mUILoop == MessageLoop::current()) {

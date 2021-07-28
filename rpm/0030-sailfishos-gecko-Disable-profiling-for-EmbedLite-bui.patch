@@ -1,0 +1,26 @@
+From 17cd60006e38c4d2148caa6c9ca5b9ebc1ca005a Mon Sep 17 00:00:00 2001
+From: David Llewellyn-Jones <david.llewellyn-jones@jolla.com>
+Date: Wed, 28 Jul 2021 16:26:42 +0000
+Subject: [PATCH] [sailfishos][gecko] Disable profiling for EmbedLite builds.
+ JB#54988
+
+---
+ toolkit/moz.configure | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/toolkit/moz.configure b/toolkit/moz.configure
+index cdcc219cf10f..ce1284099965 100644
+--- a/toolkit/moz.configure
++++ b/toolkit/moz.configure
+@@ -78,6 +78,8 @@ def gecko_profiler(target):
+     if target.os == 'Android':
+         return target.cpu in ('aarch64', 'arm', 'x86', 'x86_64')
+     elif target.kernel == 'Linux':
++        if toolkit in ('qt'):
++            return False
+         return target.cpu in ('aarch64', 'arm', 'x86', 'x86_64', 'mips64')
+     elif target.kernel == 'FreeBSD':
+         return target.cpu in ('aarch64', 'x86_64')
+-- 
+2.26.2
+
