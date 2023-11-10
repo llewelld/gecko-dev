@@ -367,7 +367,7 @@ if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DI
 
 # Expose the elf32-i386 libclang.so.13 for use inside the arm target, JB#55042
 mkdir -p "%BUILD_DIR"/lib
-SBOX_DISABLE_MAPPING=1 cp /usr/lib/libclang.so.10 "%BUILD_DIR"/lib/
+SBOX_DISABLE_MAPPING=1 cp /usr/lib/libclang.so.13 "%BUILD_DIR"/lib/
 echo "ac_add_options --with-libclang-path='"%BUILD_DIR"/lib/'" >> "$MOZCONFIG"
 
 # Do not build as thumb since it breaks video decoding.
